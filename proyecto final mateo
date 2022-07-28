@@ -1,0 +1,181 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+menu = """
+  Aplicación Matemática, Cálculo y gráfica de cónicas:
+  [1] Círculo
+  [2] Elipse
+  [3] Parábola
+  [4] Hipérbola
+  [5] Salir
+  """ 
+
+opcionesparabola="""
+  Graficar dado:
+  [1] tres puntos
+  [2] Vértice y foco
+  """ 
+
+
+
+
+
+def circulo():
+    h = int(input('Ingrese la coordenada del centro en x: '))
+    k = int(input('Ingrese la coordenada del centro en y: '))
+    r = int(input('Ingrese el radio del círculo:'))
+       
+    
+    x = np.arange(h-r-5,h+r+5,0.0001)
+    plt.clf()
+    plt.plot(x,np.sqrt(pow(r,2)-pow(x-h,2))+k,'r')
+    plt.plot(x,-np.sqrt(pow(r,2)-pow(x-h,2))+k,'r')
+    plt.grid()
+    
+    
+    
+
+def parabola():
+    print(opcionesparabola)
+    opcion = input('Digita una opcion entre 1 y 5: ')
+    if opcion == '1':
+        x1=int(input('P1x:'))
+        y1=int(input('P1y:'))
+        x2=int(input('P2x:'))
+        y2=int(input('P2y:'))
+        x3=int(input('P3x:'))
+        y3=int(input('P3y:'))
+        
+        a=np.array([[pow(x1,2),x1,1],[pow(x2,2),x2,1],[pow(x3,2),x3,1]])
+        b=np.array([y1,y2,y3])
+        v=np.linalg.solve(a, b)
+        
+        x = np.arange((-v[1]/(2*v[0]))-5,(-v[1]/(2*v[0]))+5,0.0001)
+        plt.clf()
+        plt.plot(x,v[0]*pow(x,2)+v[1]*x+v[2])
+        
+        plt.grid()
+        
+
+        
+        
+        
+        
+    elif opcion == '2':
+        Vx=int(input('Vx:'))
+        Vy=int(input('Vy:'))
+        fx=int(input('fx:'))
+        fy=int(input('fy:'))
+        
+        p=fy-Vy
+        
+        
+        x = np.arange(Vx-5,Vy+5,0.0001)
+        plt.clf()
+        plt.plot(np.sqrt(4*p*(x-Vx))+Vy,x,'b')
+        plt.plot(-np.sqrt(4*p*(x-Vx))+Vy,x,'b')
+        plt.grid()
+        
+        
+        
+    else:
+        print('Debes digitar un numero entre 1 y 2')
+        print('=-='*20)
+
+
+def elipse():
+    V1x = int(input('Vertice 1 en x: '))
+    V1y = int(input('Vertice 1 en y: '))
+    
+    V2x = int(input('Vertice 2 en x: '))
+    V2y = int(input('Vertice 2 en y: '))
+    
+    f1x = int(input('Foco 1 en x: '))
+    f1y = int(input('Foco 1 en y: '))
+    
+    f2x = int(input('Foco 2 en x: '))
+    f2y = int(input('Foco 2 en y: '))
+    
+    h=f2x-f1x
+    k=f2y
+    a=V2x-h
+    c=f2x-h
+    b=np.sqrt(pow(a,2)-pow(c,2))
+
+    
+       
+    
+    x = np.arange(h-5,h+5,0.0001)
+    plt.clf()
+    plt.plot(x,(b/a)*np.sqrt(pow(a,2)-pow(x-h,2))+k,'r')
+    plt.plot(x,-(b/a)*np.sqrt(pow(a,2)-pow(x-h,2))+k,'r')
+    plt.grid()
+
+    
+
+
+
+def hiperbola():
+    
+    Vx = int(input('Vertice en x: '))
+    Vy = int(input('Vertice en y: '))
+    
+    
+    f1x = int(input('Foco 1 en x: '))
+    f1y = int(input('Foco 1 en y: '))
+    
+    h = int(input('Centro en x: '))
+    k = int(input('Centro en y: '))
+    
+
+    a=Vy-k
+    print(a)
+    c=f1y-k
+    print(c)
+    b=np.sqrt(pow(c,2)-pow(a,2))
+    print(b)
+    
+       
+    
+    x = np.arange(h-15,h+15,0.0001)
+    plt.clf()
+    plt.plot(x,(b/a)*np.sqrt(pow(a,2)+pow(x-h,2))+k,'r')
+    plt.plot(x,-(b/a)*np.sqrt(pow(a,2)+pow(x-h,2))+k,'r')
+    plt.grid()
+    
+
+
+print('=-='*20)
+print(menu)
+
+while True:
+   
+    opcion = input('Digita una opcion entre 1 y 5: ')
+    
+    if opcion == '1':
+        circulo()
+        break   
+            
+    if opcion == '2':
+        elipse()
+        break
+    if opcion == '3':
+        parabola()        
+        break    
+            
+    if opcion == '4':
+        hiperbola()   
+        break    
+            
+    if opcion== '5':
+        print('')
+        print('MUCHAS GRACIAS')
+        print('=-='*20)
+        break
+    
+        
+    else:
+        print("")
+        print('Error debes digitar un numero entre 1 y 5')
+        print('=-='*20)
